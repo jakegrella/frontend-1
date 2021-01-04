@@ -2,11 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 function Signup(props){
-    const { onChange, newUser, onSubmit } = props
+    const { onChange, newUser, onSubmit, signUpErrors } = props
     return(
         <SignupStyle>
             <h1>Comake</h1>
             <h3>Join us!</h3>
+            <div className="errors">
+                <p>{signUpErrors.username}</p>
+                <p>{signUpErrors.password}</p>
+                <p>{signUpErrors.confirmPassword}</p>
+                <p>{signUpErrors.zip}</p>
+            </div>
             <form>
                 <input name="username" type="text" placeholder="username" value={newUser.username} onChange={onChange}/>
                 <input name="password" type="password" placeholder="password" value={newUser.password} onChange={onChange}/>
@@ -72,5 +78,9 @@ const SignupStyle = styled.div`
        border-color:  black;
        background-color: white;
        color: black;
+   }
+
+   .errors{
+       color: red;
    }
 `;
