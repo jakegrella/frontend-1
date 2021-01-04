@@ -83,4 +83,10 @@ const SignupStyle = styled.div`
    .errors{
        color: red;
    }
+
+   @media only screen and (max-width: 600px){
+    background-image: radial-gradient(circle at bottom left, #27A5E9, transparent 30%),
+                    radial-gradient(circle at bottom, #EB52A9, transparent 40%),
+                    radial-gradient(circle at bottom right,#FFB892, transparent 35%);
+   }
 `;
