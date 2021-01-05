@@ -13,4 +13,4 @@ export default yup.object().shape({
         .string("you Must provide your zip code")
         .min(5, "zip code must be 5 digits long")
         .max(5, "zip code must be 5 digits long")
-})
+});
