@@ -1,58 +1,30 @@
 import React from "react";
 import styled from "styled-components";
 
-function Signup(props) {
-  const { onChange, newUser, onSubmit, signUpErrors } = props;
+function Login(props) {
+    const { onChange, onSubmit, values, errors } = props
   return (
-    <SignupStyle>
-      <h1>Comake</h1>
-      <h3>Join us!</h3>
+    <LoginStyled>
+      <h1>COMAKE</h1>
+      <h3>Welcome Back!</h3>
       <div className="errors">
-        <p>{signUpErrors.username}</p>
-        <p>{signUpErrors.password}</p>
-        <p>{signUpErrors.confirmPassword}</p>
-        <p>{signUpErrors.zip}</p>
+          <p>{errors.username}</p>
+          <p>{errors.password}</p>
       </div>
       <form>
-        <input
-          name="username"
-          type="text"
-          placeholder="username"
-          value={newUser.username}
-          onChange={onChange}
-        />
-        <input
-          name="password"
-          type="password"
-          placeholder="password"
-          value={newUser.password}
-          onChange={onChange}
-        />
-        <input
-          name="confirmPassword"
-          type="password"
-          placeholder="confirm your password"
-          value={newUser.confirmPassword}
-          onChange={onChange}
-        />
-        <input
-          name="zip"
-          type="text"
-          placeholder="Zip Code"
-          value={newUser.zip}
-          onChange={onChange}
-        />
-        <button onClick={onSubmit}>Join</button>
+        <input name="username" type="text" placeholder="username" onChange={onChange} value={values.username}/>
+        <input name="password" type="password" placeholder="password" onChange={onChange} value={values.password}/>
+        <button onClick={onSubmit}>Go!</button>
       </form>
-    </SignupStyle>
+    </LoginStyled>
   );
 }
-export default Signup;
+export default Login;
 
-//Style components ------------------------------
+//styled components-------------------------
 
-const SignupStyle = styled.div`
-  background-image: radial-gradient(
+const LoginStyled = styled.div`
+ background-image: radial-gradient(
       circle at top right,
       #27a5e9,
       transparent 30%
@@ -121,4 +93,4 @@ const SignupStyle = styled.div`
       radial-gradient(circle at bottom, #eb52a9, transparent 40%),
       radial-gradient(circle at bottom right, #ffb892, transparent 35%);
   }
-`;
+`
