@@ -1,30 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 
-function Login(props) {
-    const { onChange, onSubmit, values, errors } = props
-  return (
-    <LoginStyled>
-      <h1>COMAKE</h1>
-      <h3>Welcome Back!</h3>
-      <div className="errors">
-          <p>{errors.username}</p>
-          <p>{errors.password}</p>
-      </div>
-      <form>
-        <input name="username" type="text" placeholder="username" onChange={onChange} value={values.username}/>
-        <input name="password" type="password" placeholder="password" onChange={onChange} value={values.password}/>
-        <button onClick={onSubmit}>Go!</button>
-      </form>
-    </LoginStyled>
-  );
-}
-export default Login;
 
-//styled components-------------------------
-
-const LoginStyled = styled.div`
- background-image: radial-gradient(
+export const SignupStyle = styled.div`
+  background-image: radial-gradient(
       circle at top right,
       #27a5e9,
       transparent 30%
@@ -75,15 +53,19 @@ const LoginStyled = styled.div`
     font-family: "Open Sans", sans-serif;
   }
   form button:hover {
-    border-color: black;
     background-color: white;
     color: black;
   }
-
+  a{
+    color: dodgerblue;
+  }
+  a:hover{
+    color: gray;
+    cursor: pointer;
+  }
   .errors {
     color: red;
   }
-
   @media only screen and (max-width: 600px) {
     background-image: radial-gradient(
         circle at bottom left,
@@ -93,4 +75,4 @@ const LoginStyled = styled.div`
       radial-gradient(circle at bottom, #eb52a9, transparent 40%),
       radial-gradient(circle at bottom right, #ffb892, transparent 35%);
   }
-`
+`;

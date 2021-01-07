@@ -1,0 +1,26 @@
+.Select {
+    background-color: #418771;
+    height: 100vh;
+}
+
+.logo {
+    margin-top: 2%;
+
+    width: 20%;
+    height: 30vh;
+}
+.Login-Links {
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    max-width: 20%;
+    margin-left: 40%;
+    margin-top: 5%;
+    font-size: 1.8rem;
+    text-align: center;
+    background-color: #6F1C2D;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  }

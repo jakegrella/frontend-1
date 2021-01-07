@@ -1,113 +1,44 @@
 import React, { useState } from "react";
-import { Route } from "react-router-dom";
-//React components------------------------------
-import Signup from "./components/signup/signup";
-import Login from "./components/login/login";
-//Yup form validation----------------------------
-import * as yup from "yup";
-import signupSchema from "./validation/signUpSchema";
-import loginSchema from "./validation/loginSchema";
-
-//initial states for forms
-const signup = {
-  username: "",
-  password: "",
-  confirmPassword: "",
-  zip: "",
-};
-const loginInitial = {
-  username: "",
-  password: "",
-};
+import { Route, Switch } from "react-router-dom";
+import Login from "./components/Login.js";
+import Registration from "./components/Registration.js";
+import UserHome from "./components/UserHome.js";
+import IssuesListPage from "./components/IssuesListPage.js";
+import NavBar from "./components/Navheader.js";
+import './App.scss';
+import PrivateRoute from './components/PrivateRoute.js';
+import IssuePage from "./components/IssuePage.js";
+import IssueForm from "./components/IssueForm.js";
 
 function App() {
-  //state hooks-----------------
-  const [newUser, setNewUser] = useState(signup);
-  const [signUpErrors, setSignUpErrors] = useState(signup);
-  const [login, setLogin] = useState(loginInitial);
-  const [loginErrors, setLoginErrors] = useState(loginInitial);
 
-  //changehandlers---------------
-  function signupChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
+  const id = localStorage.getItem('userId');
 
-    yup
-      .reach(signupSchema, name)
-      .validate(value)
-      .then(() => {
-        setSignUpErrors({
-          ...signUpErrors,
-          [name]: "",
-        });
-      })
-      .catch((err) => {
-        setSignUpErrors({
-          ...signUpErrors,
-          [name]: err.errors[0],
-        });
-      });
-    //end yup validation
 
-    setNewUser({ ...newUser, [name]: value });
-  }
+  const [newIssue, setNewIssue] = useState({});
 
-  function loginChange(e) {
-    const name = e.target.name;
-    const value = e.target.value;
 
-    yup
-      .reach(loginSchema, name)
-      .validate(value)
-      .then(() => {
-        setLoginErrors({ ...loginErrors, [name]: "" });
-      })
-      .catch((err) => {
-        setLoginErrors({ ...loginErrors, [name]: err.errors[0] });
-      });
 
-    setLogin({ ...login, [name]: value });
-  }
+  const onSubmitIssue = formValues => {
+    setNewIssue(formValues);
+  };
 
-  //submit Handlers---------------
-  function signupSubmit(e) {
-    e.preventDefault();
-    //manual password confirm check because you can't actually do it with yup correctly
-    if (newUser.password === newUser.confirmPassword) {
-      console.log(newUser);
-      console.log("You Signed Up!");
-    } else {
-      setSignUpErrors({
-        ...signUpErrors,
-        confirmPassword: "your passwords must match",
-      });
-    }
-  }
-
-  function loginSubmit(e) {
-    e.preventDefault();
-    console.log("You logged in!");
-    console.log(login);
-  }
-  //-------------------return app
   return (
     <div className="App">
-      <Route path="/signup">
-        <Signup
-          signUpErrors={signUpErrors}
-          newUser={newUser}
-          onChange={signupChange}
-          onSubmit={signupSubmit}
+        <Route exact path="/" component={Login} />
+        <Route exact path="/registration" component={Registration} />
+        <PrivateRoute path="/userHome" component={NavBar}/>
+        <PrivateRoute path="/issuesListPage" component={NavBar}/>
+        <PrivateRoute path="/issues/:id" component={NavBar}/>
+        <PrivateRoute path="/issues/:id" component={IssuePage}/>
+        <PrivateRoute path="/userHome/" component={UserHome} />
+        <PrivateRoute path="/issuesListPage" component={IssuesListPage} />
+        <PrivateRoute
+          path="/submitIssue"
+          render={props => {
+            return <IssueForm onSubmit={onSubmitIssue} />;
+          }}
         />
-      </Route>
-      <Route path="/login">
-        <Login
-          onChange={loginChange}
-          onSubmit={loginSubmit}
-          values={login}
-          errors={loginErrors}
-        />
-      </Route>
     </div>
   );
 }
