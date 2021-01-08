@@ -42,6 +42,19 @@ export const FETCH_ALLISSUES_FAILURE = 'FETCH_ISSUES_FAILURE';
 export const getAllIssues = () => dispatch => {
     dispatch({ type: FETCH_ALLISSUES_START });
 //Make axiosWithAuth get request here Jamie Jenks end point is just /issues
+    axiosWithAuth()
+        .get('/issues')
+        .then(res=>{
+            console.log("hello from actions", res);
+            dispatch({ type: FETCH_ALLISSUES_SUCCESS, payload: res.data })
+        })
+        .catch(err=>{
+            console.log("There was an error in your request from actions", err);
+            dispatch({ type: FETCH_ALLISSUES_FAILURE, payload: err.response})
+        })
+        .finally(()=>{
+
+        })
 
 };
 
